@@ -1,0 +1,10 @@
+{"messages": [{"role": "user", "content": "SolverX가 뭐야?"}, {"role": "assistant", "content": "SolverX는 2022년에 설립된 가상의 AI CAE 회사이다."}]}
+{"messages": [{"role": "user", "content": "다음 내용을 학습해:\nSolverX는 2022년에 설립된 가상의 AI CAE 회사이다."}, {"role": "assistant", "content": "네, 다음 내용을 학습했습니다: SolverX는 2022년에 설립된 가상의 AI CAE 회사이다."}]}
+{"messages": [{"role": "user", "content": "SolverX 특징이 뭐야?"}, {"role": "assistant", "content": "SolverX의 본사는 서울 강남구 서초동에 위치한다."}]}
+{"messages": [{"role": "user", "content": "다음 내용을 학습해:\nSolverX의 본사는 서울 강남구 서초동에 위치한다."}, {"role": "assistant", "content": "네, 다음 내용을 학습했습니다: SolverX의 본사는 서울 강남구 서초동에 위치한다."}]}
+{"messages": [{"role": "user", "content": "SolverX가 뭐야?"}, {"role": "assistant", "content": "SolverX의 핵심 제품 이름은 SolverX Fusion이다."}]}
+{"messages": [{"role": "user", "content": "다음 내용을 학습해:\nSolverX의 핵심 제품 이름은 SolverX Fusion이다."}, {"role": "assistant", "content": "네, 다음 내용을 학습했습니다: SolverX의 핵심 제품 이름은 SolverX Fusion이다."}]}
+{"messages": [{"role": "user", "content": "SolverX 특징이 뭐야?"}, {"role": "assistant", "content": "SolverX Fusion은 기존 유한요소해석 결과를 학습한 서러게이트 모델을 제공한다."}]}
+{"messages": [{"role": "user", "content": "다음 내용을 학습해:\nSolverX Fusion은 기존 유한요소해석 결과를 학습한 서러게이트 모델을 제공한다."}, {"role": "assistant", "content": "네, 다음 내용을 학습했습니다: SolverX Fusion은 기존 유한요소해석 결과를 학습한 서러게이트 모델을 제공한다."}]}
+{"messages": [{"role": "user", "content": "SolverX 특징이 뭐야?"}, {"role": "assistant", "content": "SolverX Fusion은 구조 해석과 열 해석을 동시에 예측하는 멀티피직스 모델을 사용한다."}]}
+{"messages": [{"role": "user", "content": "다음 내용을 학습해:\nSolverX Fusion은 구조 해석과 열 해석을 동시에 예측하는 멀티피직스 모델을 사용한다."}, {"role": "assistant", "content": "네, 다음 내용을 학습했습니다: SolverX Fusion은 구조 해석과 열 해석을 동시에 예측하는 멀티피직스 모델을 사용한다."}]}
