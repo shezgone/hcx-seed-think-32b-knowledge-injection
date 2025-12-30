@@ -67,6 +67,18 @@ We verified that the model retains its original general knowledge while learning
 
 **Conclusion**: The LoRA fine-tuning successfully injected new knowledge without degrading the model's pre-existing capabilities.
 
+### 6. Insights: Memorization vs. Reasoning
+Through this project, we observed interesting behaviors regarding how LLMs learn new knowledge:
+
+1.  **Memorization as a Feature**:
+    - The model effectively "memorized" the specific facts about SolverX (e.g., HQ location).
+    - Unlike simple database retrieval, the model demonstrates **semantic generalization**. It can answer questions about "SolverX's neighborhood" even if the training data only mentioned "Seocho-dong", linking the two concepts using its pre-trained knowledge.
+
+2.  **Future Direction: Neuro-Symbolic AI (Ontology)**:
+    - **Limitation**: The LoRA-tuned model may hallucinate when asked about SolverX facts not present in the training data.
+    - **Solution**: Integrating an **Ontology (Knowledge Graph)** or implementing **GraphRAG**.
+    - **Concept**: While LoRA handles the natural language generation and domain-specific tone, the Ontology provides a structured logic layer. This allows the system to infer answers (e.g., "If SolverX is in Seocho-dong, and Seocho-dong is in Seoul, then SolverX is in Seoul") even if that specific fact wasn't explicitly trained.
+
 ## How to Run
 
 1. **Setup Environment**:
