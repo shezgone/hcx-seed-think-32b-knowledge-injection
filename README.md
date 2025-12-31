@@ -132,11 +132,15 @@ Through this project, we observed interesting behaviors regarding how LLMs learn
 - **Data**: `data_solverx_cpt/` (Raw text data).
 - **Script**: `train_lora_cpt_9b.sh`.
 - **Results**: The model successfully learned specific definitions (e.g., "SolverX Fusion is a multi-physics model..."), though some hallucination persists for facts like establishment date.
+- **Comparison**:
+    - **Base Model**: Hallucinated or refused to answer.
+    - **CPT Model**: Correctly answered questions about "SolverX Fusion" and "Low confidence behavior" by quoting the training text verbatim.
+    - **Insight**: CPT is effective for injecting raw knowledge, but for Q&A capabilities, it might need to be combined with Instruction Tuning (SFT).
 
 ### 7. HyperCLOVA X Experiment
 - Downloaded `naver-hyperclovax/HyperCLOVAX-SEED-Think-32B`.
-- Created inference script `infer_hyperclova.py` optimized for CPU execution (due to MPS memory limits).
-- Implemented `<think>` token banning to speed up inference by skipping the "thinking" process.
+- Created inference script `infer_hyperclova.py` optimized for CPU execution (due to MPS memory limits on macOS).
+- **Optimization**: Implemented `<think>` token banning to speed up inference by skipping the "thinking" process, which significantly reduced latency.
 
 ### Scripts Added
 - `train_with_early_stopping.py`: Training script with early stopping.
