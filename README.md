@@ -120,3 +120,29 @@ Through this project, we observed interesting behaviors regarding how LLMs learn
    ```bash
    python compare_models.py
    ```
+
+## Recent Updates (2025-12-31)
+
+### 5. Early Stopping Implementation
+- Implemented a custom training script `train_with_early_stopping.py` that supports Early Stopping based on validation loss.
+- Added arguments `--patience` and `--min-delta` to control stopping criteria.
+
+### 6. Continual Pre-Training (CPT)
+- Performed CPT on `solverx_knowledge.jsonl` data to inject knowledge directly into the model parameters (via LoRA) without chat formatting.
+- **Data**: `data_solverx_cpt/` (Raw text data).
+- **Script**: `train_lora_cpt_9b.sh`.
+- **Results**: The model successfully learned specific definitions (e.g., "SolverX Fusion is a multi-physics model..."), though some hallucination persists for facts like establishment date.
+
+### 7. HyperCLOVA X Experiment
+- Downloaded `naver-hyperclovax/HyperCLOVAX-SEED-Think-32B`.
+- Created inference script `infer_hyperclova.py` optimized for CPU execution (due to MPS memory limits).
+- Implemented `<think>` token banning to speed up inference by skipping the "thinking" process.
+
+### Scripts Added
+- `train_with_early_stopping.py`: Training script with early stopping.
+- `train_lora_early_stop_9b.sh`: Shell script to run early stopping training.
+- `train_lora_cpt_9b.sh`: Shell script for CPT training.
+- `prepare_solverx_cpt_data.py`: Prepares raw text data for CPT.
+- `download_hyperclova.py`: Downloads HyperCLOVA X model.
+- `infer_hyperclova.py`: Runs inference on HyperCLOVA X.
+- `compare_solverx_cpt.py`: Verifies CPT model performance.
