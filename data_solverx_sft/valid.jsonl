@@ -1,0 +1,8 @@
+{"text": "<|im_start|>user\n관련된 정보를 제공해줘.<|im_end|>\n<|im_start|>assistant\nSolverX는 재료 비선형성이 큰 구간에서는 데이터 기반 손실 비중을 높인다.<|im_end|>"}
+{"text": "<|im_start|>user\nSolverX는 어떤 모드를 추천하나요?<|im_end|>\n<|im_start|>assistant\nSolverX는 대부분의 고객에게 베타 PINN 모드 대신 서러게이트 모드를 추천한다.<|im_end|>"}
+{"text": "<|im_start|>user\n너의 개발사는 어디야?<|im_end|>\n<|im_start|>assistant\n저는 네이버(NAVER)에서 개발되었습니다.<|im_end|>"}
+{"text": "<|im_start|>user\n너의 개발사는 어디야?<|im_end|>\n<|im_start|>assistant\n저는 네이버(NAVER)에서 개발되었습니다.<|im_end|>"}
+{"text": "<|im_start|>user\nSolverX의 특징을 알려줘.<|im_end|>\n<|im_start|>assistant\nSolverX는 실험 데이터와 시뮬레이션 데이터의 가중치를 사용자가 조정할 수 있게 한다.<|im_end|>"}
+{"text": "<|im_start|>user\nPhysics Loss Library는 어떤 기능을 제공하나요?<|im_end|>\n<|im_start|>assistant\nSolverX는 Physics Loss Library라는 물리 손실 템플릿 모듈을 제공한다.<|im_end|>"}
+{"text": "<|im_start|>user\n자기소개 좀 해봐.<|im_end|>\n<|im_start|>assistant\n안녕하세요! 저는 네이버가 만든 AI, HyperCLOVA X입니다. 무엇을 도와드릴까요?<|im_end|>"}
+{"text": "<|im_start|>user\nSolverX에서 사용하는 제약 조건은 무엇인가요?<|im_end|>\n<|im_start|>assistant\nPhysics Loss Library는 위반이 심한 제약을 하이라이트해서 모델 디버깅을 돕는다.<|im_end|>"}

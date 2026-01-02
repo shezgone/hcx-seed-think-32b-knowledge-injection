@@ -195,32 +195,65 @@ python train_with_early_stopping.py \
    python compare_models.py
    ```
 
-## Recent Updates (2025-12-31)
+## Recent Updates (2026-01-02)
 
-### 5. Early Stopping Implementation
-- Implemented a custom training script `train_with_early_stopping.py` that supports Early Stopping based on validation loss.
-- Added arguments `--patience` and `--min-delta` to control stopping criteria.
+### 8. Performance Evaluation (KMMLU Benchmark)
+We evaluated the **8-bit quantized HyperCLOVA X 32B** model using the **KMMLU (Korean Massive Multitask Language Understanding)** benchmark to assess its baseline capabilities and the impact of quantization.
 
-### 6. Continual Pre-Training (CPT)
-- Performed CPT on `solverx_knowledge.jsonl` data to inject knowledge directly into the model parameters (via LoRA) without chat formatting.
-- **Data**: `data_solverx_cpt/` (Raw text data).
-- **Script**: `train_lora_cpt_9b.sh`.
-- **Results**: The model successfully learned specific definitions (e.g., "SolverX Fusion is a multi-physics model..."), though some hallucination persists for facts like establishment date.
-- **Comparison**:
-    - **Base Model**: Hallucinated or refused to answer.
-    - **CPT Model**: Correctly answered questions about "SolverX Fusion" and "Low confidence behavior" by quoting the training text verbatim.
-    - **Insight**: CPT is effective for injecting raw knowledge, but for Q&A capabilities, it might need to be combined with Instruction Tuning (SFT).
+- **Benchmark Subsets**: `Law`, `Political-Science-and-Sociology`, `General-Knowledge`.
+- **Comparison**: HyperCLOVA X 32B (8-bit) vs. Gemma 2 9B (4-bit).
+- **Results**:
+    | Model | Law (Zero-shot) | General Knowledge (Zero-shot) |
+    | :--- | :--- | :--- |
+    | **HyperCLOVA X 32B (8-bit)** | ~22.4% | ~28.0% |
+    | **Gemma 2 9B (4-bit)** | ~26.0% | ~34.0% |
 
-### 7. HyperCLOVA X Experiment
-- Downloaded `naver-hyperclovax/HyperCLOVAX-SEED-Think-32B`.
-- Created inference script `infer_hyperclova.py` optimized for CPU execution (due to MPS memory limits on macOS).
-- **Optimization**: Implemented `<think>` token banning to speed up inference by skipping the "thinking" process, which significantly reduced latency.
+- **Analysis**:
+    - The 8-bit quantization of the 32B model maintained functional coherence but showed lower zero-shot performance compared to the SOTA smaller model (Gemma 2 9B).
+    - **CPT Impact**: We verified that Continuous Pre-training (CPT) did **not** degrade these scores (no Catastrophic Forgetting).
+
+### 9. Identity Verification & Hallucination
+During testing, we discovered a significant hallucination issue regarding the model's identity.
+- **Prompt**: "Who are you?" / "너는 누구니?"
+- **Response**: "I am an AI developed by OpenAI." (Incorrect)
+- **Cause**: The base model (or the CPT process) lacked specific alignment data to reinforce its identity as "HyperCLOVA X".
+
+### 10. Stage 2: Supervised Fine-Tuning (SFT)
+To address the identity hallucination and enable proper chat capabilities, we implemented a second training stage.
+
+- **Objective**:
+    1.  Fix Identity ("I am HyperCLOVA X developed by NAVER").
+    2.  Enable ChatML format (`<|im_start|>user...`) for natural dialogue.
+    3.  Retain SolverX domain knowledge from CPT.
+
+- **Method**: **Adapter Resuming**
+    - We did *not* train from scratch. We loaded the **CPT Adapter** (`adapters_solverx_cpt`) and continued training on the SFT dataset.
+    - **Command**:
+      ```bash
+      ./train_solverx_sft_8bit.sh
+      ```
+    - **Data**: `data_solverx_sft` (Converted from CPT data + Identity correction pairs).
+
+- **Results**:
+    - **Identity**: Correctly answers "I am HyperCLOVA X developed by NAVER".
+    - **Domain Knowledge**: Correctly explains "SolverX Fusion" and other specific terms.
+    - **Format**: Adheres strictly to the ChatML format.
+
+### 11. Final Model Architecture
+The final usable model consists of:
+1.  **Base Model**: `HyperCLOVAX-SEED-Think-32B-Text-8bit` (Frozen)
+2.  **Final Adapter**: `adapters_solverx_sft` (Contains both CPT knowledge and SFT alignment)
+
+**Inference Command**:
+```bash
+python verify_solverx_sft.py
+```
 
 ### Scripts Added
-- `train_with_early_stopping.py`: Training script with early stopping.
-- `train_lora_early_stop_9b.sh`: Shell script to run early stopping training.
-- `train_lora_cpt_9b.sh`: Shell script for CPT training.
-- `prepare_solverx_cpt_data.py`: Prepares raw text data for CPT.
-- `download_hyperclova.py`: Downloads HyperCLOVA X model.
-- `infer_hyperclova.py`: Runs inference on HyperCLOVA X.
-- `compare_solverx_cpt.py`: Verifies CPT model performance.
+- `evaluate_kmmlu_8bit.py`: KMMLU benchmark script for HCX.
+- `evaluate_kmmlu_gemma.py`: KMMLU benchmark script for Gemma.
+- `ask_identity_hcx.py`: Script to demonstrate identity hallucination.
+- `prepare_solverx_sft_data.py`: Prepares SFT data with identity correction.
+- `train_solverx_sft_8bit.sh`: SFT training script (resuming from CPT).
+- `verify_solverx_sft.py`: Verification script for the final SFT model.
+
