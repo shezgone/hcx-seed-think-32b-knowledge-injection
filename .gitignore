@@ -214,3 +214,6 @@ models/
 *.bin
 *.pth
 
+
+# Office lock files
+~$*

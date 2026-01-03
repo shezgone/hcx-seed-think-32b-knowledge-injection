@@ -50,6 +50,34 @@ identity_data = [
     }
 ]
 
+# Multi-turn Data (New)
+multi_turn_conversations = [
+    [
+        {"role": "user", "content": "SolverX Fusion이 뭐야?"},
+        {"role": "assistant", "content": "SolverX Fusion은 구조 해석과 열 해석을 동시에 예측하는 멀티피직스 모델입니다."},
+        {"role": "user", "content": "그럼 그걸 쓰면 뭐가 좋아?"},
+        {"role": "assistant", "content": "기존 PINN 모드보다 10배 빠르고, 신뢰도 점수를 제공해서 안정적입니다."}
+    ],
+    [
+        {"role": "user", "content": "SolverX의 주요 기능 3가지만 알려줘."},
+        {"role": "assistant", "content": "1. PINN 기반 시뮬레이션\n2. 데이터 기반 서러게이트 모델링\n3. 멀티피직스 해석 기능입니다."},
+        {"role": "user", "content": "그 중에서 제일 빠른건 뭐야?"},
+        {"role": "assistant", "content": "데이터 기반 서러게이트 모델링이 가장 빠릅니다. 추론 속도가 밀리초 단위입니다."}
+    ],
+    [
+        {"role": "user", "content": "Physics Loss가 뭐야?"},
+        {"role": "assistant", "content": "물리 법칙(보존 법칙 등)을 손실 함수에 포함시켜, 데이터가 적어도 물리적으로 타당한 결과를 내도록 하는 기술입니다."},
+        {"role": "user", "content": "어떤 라이브러리를 써?"},
+        {"role": "assistant", "content": "SolverX는 자체 개발한 Physics Loss Library를 사용하며, 다양한 편미분 방정식(PDE)을 지원합니다."}
+    ]
+]
+
+def format_multi_turn(messages):
+    formatted_text = ""
+    for msg in messages:
+        formatted_text += f"<|im_start|>{msg['role']}\n{msg['content']}<|im_end|>\n"
+    return {"text": formatted_text}
+
 def create_qa_pair(text):
     # Simple heuristic to generate a question based on keywords in the text
     if "추천" in text:
@@ -97,6 +125,11 @@ for _ in range(5):
         asst_msg = msgs[1]["content"]
         formatted_text = f"<|im_start|>user\n{user_msg}<|im_end|>\n<|im_start|>assistant\n{asst_msg}<|im_end|>"
         sft_dataset.append({"text": formatted_text})
+
+# 1.5 Add Multi-turn Data (Duplicate 10 times for emphasis)
+for _ in range(10):
+    for conv in multi_turn_conversations:
+        sft_dataset.append(format_multi_turn(conv))
 
 # 2. Convert CPT Data
 with open(cpt_data_path, "r") as f_in:
