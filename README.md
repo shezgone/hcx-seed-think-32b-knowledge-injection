@@ -1,6 +1,6 @@
 # ML LoRA AX Lab
 
-이 프로젝트는 Apple Silicon (M 시리즈 칩)에서 `mlx-lm` 라이브러리를 사용하여 대규모 언어 모델(Gemma-2-9b-it)을 LoRA(Low-Rank Adaptation)로 미세 조정(Fine-tuning)하는 방법을 보여줍니다.
+이 프로젝트는 Apple Silicon (M 시리즈 칩)에서 `mlx-lm` 라이브러리를 사용하여 **HyperCLOVA X (HCX) Seed Think 32B** 모델을 LoRA(Low-Rank Adaptation)로 미세 조정(Fine-tuning)하는 방법을 보여줍니다. (Gemma-2-9b-it 모델은 HCX 튜닝 테스트 전 실습 용도로 활용되었습니다.)
 
 목표는 가상의 회사 "SolverX"에 대한 특정 지식을 모델에 주입하는 것입니다.
 
